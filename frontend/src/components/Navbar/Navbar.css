@@ -1,0 +1,300 @@
+/* ========== NAVBAR BASE ========== */
+.navbar {
+    padding: 1px 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(82, 82, 82, 0.05);
+    position: relative;
+    z-index: 10;
+    border-radius: 20px; /* Added for rounded corners */
+}
+
+/* ========== LOGO ========== */
+.navbar .logo {
+    width: 200px;
+}
+
+/* ========== MENU LINKS ========== */
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    color: #49557e;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar li {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: #49557e;
+}
+
+/* Hover Effect with Color + Rounded Background */
+.navbar li:hover {
+    background-color: #ffe8e2;  /* Soft peach tone */
+    color: #ff6347;             /* Tomato red text */
+    transform: translateY(-1px);
+}
+
+/* Active State */
+.navbar .active {
+    padding: 6px 12px;
+    background-color: #ff6347;  /* Solid tomato background */
+    color: white;
+    border-radius: 20px;
+}
+
+
+/* ========== RIGHT SIDE: SEARCH + PROFILE + BUTTON ========== */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Button */
+.navbar button {
+    background: transparent;
+    font-size: 15px;
+    color: #49557e;
+    border: 1px solid tomato;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navbar button:hover {
+    background-color: #fff4f2;
+    color: tomato;
+}
+
+/* Search Dot */
+.navbar-search-icon {
+    position: relative;
+}
+
+.navbar-search-icon .dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: tomato;
+    border-radius: 50%;
+    top: -6px;
+    right: -6px;
+}
+/* ========== PROFILE ICON ========== */
+.navbar-profile {
+  position: relative;
+  cursor: pointer;
+  width: 28px; /* smaller width */
+  height: 28px; /* smaller height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.navbar-profile:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* ========== PROFILE DROPDOWN ========== */
+.nav-profile-dropdown {
+  position: absolute;
+  top: 105%; /* Reduced vertical distance */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: none;
+  flex-direction: column;
+  gap: 8px; /* Less spacing between items */
+  background-color: #ffffff;
+  padding: 10px 12px; /* Reduced padding */
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  min-width: 150px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Triangle pointer */
+.nav-profile-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom-color: #ffffff;
+}
+
+/* Show dropdown on hover */
+.navbar-profile:hover .nav-profile-dropdown {
+  display: flex;
+}
+
+/* List item styles */
+.nav-profile-dropdown li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #374151;
+  font-weight: 500;
+  font-size: 14px; /* Smaller font */
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-profile-dropdown li:hover {
+  background-color: #f3f4f6;
+  color: #2563eb;
+}
+
+/* Icon inside dropdown */
+.nav-profile-dropdown img {
+  width: 16px; /* Smaller icon */
+  height: 16px;
+  object-fit: contain;
+  filter: grayscale(30%);
+  transition: filter 0.3s ease;
+}
+
+.nav-profile-dropdown li:hover img {
+  filter: none;
+}
+
+
+
+/* ========== TABLETS ========== */
+@media (max-width: 1050px) {
+  .navbar .logo {
+    width: 140px;
+  }
+
+  .navbar-menu {
+    gap: 18px;
+    font-size: 17px;
+  }
+
+  .navbar-right {
+    gap: 24px;
+  }
+
+  .navbar-right button {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+}
+
+/* ========== SMALL TABLETS ========== */
+@media (max-width: 900px) {
+  .navbar .logo {
+    width: 120px;
+  }
+
+  .navbar-menu {
+    gap: 14px;
+    font-size: 16px;
+  }
+
+  .navbar-right {
+    gap: 20px;
+  }
+
+  .navbar-right button {
+    padding: 7px 18px;
+    font-size: 13px;
+  }
+
+  .navbar-gif-carousel {
+    width: 240px;
+    height: 50px;
+  }
+
+  .navbar-gif-track img {
+    width: 80px;
+    height: 50px;
+  }
+}
+
+/* ========== MOBILE PHONES ========== */
+@media (max-width: 750px) {
+  .navbar-menu {
+    display: none;
+  }
+
+  .navbar .logo {
+    width: 100px;
+  }
+
+  .navbar-right {
+    gap: 14px;
+  }
+
+  .navbar-right button {
+    padding: 6px 14px;
+    font-size: 12.5px;
+  }
+
+  .navbar-gif-carousel {
+    width: 200px;
+    height: 45px;
+    margin-right: 10px;
+  }
+
+  .navbar-gif-track img {
+    width: 70px;
+    height: 45px;
+  }
+}
+
+/* ========== CAROUSEL CONTAINER ========== */
+.navbar-gif-carousel {
+  width: 300px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  margin-right: 18px;
+  display: flex;
+  align-items: center;
+  border: none;
+}
+
+/* ========== SLIDING TRACK ========== */
+.navbar-gif-track {
+  display: flex;
+  animation: scrollGifs 15s linear infinite;
+  width: max-content;
+}
+
+/* ========== INDIVIDUAL GIF ========== */
+.navbar-gif-track img {
+  width: 100px;
+  height: 60px;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* ========== SMOOTH LOOP ANIMATION ========== */
+@keyframes scrollGifs {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+

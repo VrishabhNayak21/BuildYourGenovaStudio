@@ -1,0 +1,127 @@
+.place-order {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 50px;
+  margin-top: 100px;
+  flex-wrap: wrap;
+  padding: 0 5vw;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.place-order-left {
+  width: 100%;
+  max-width: 500px;
+  background: linear-gradient(135deg, #ffffff, #f4f4f4);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  transition: all 0.3s ease;
+}
+
+.place-order-left:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.09);
+}
+
+.place-order-left .title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #2c2c2c;
+  text-transform: uppercase;
+}
+
+.place-order-left input {
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline-color: #ff6347;
+  font-size: 15px;
+  transition: border 0.3s;
+}
+
+.place-order-left input:focus {
+  border-color: #ff6347;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+}
+
+.place-order-left .multi-fields {
+  display: flex;
+  gap: 15px;
+}
+
+.place-order-right {
+  width: 100%;
+  max-width: 500px;
+  background: linear-gradient(135deg, #fff, #fefefe);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  transition: all 0.3s ease;
+}
+
+.place-order-right:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.09);
+}
+
+.cart-total h2 {
+  font-size: 26px;
+  margin-bottom: 25px;
+  color: #1f1f1f;
+  text-align: center;
+}
+
+.cart-total-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin: 12px 0;
+  color: #444;
+}
+
+.cart-total-details.total {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.cart-total hr {
+  border: none;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 15px 0;
+}
+
+.cart-total button {
+  width: 100%;
+  background: linear-gradient(to right, #ff6347, #ff4500);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 30px;
+  transition: 0.3s ease-in-out;
+  letter-spacing: 0.5px;
+}
+
+.cart-total button:hover {
+  background: linear-gradient(to right, #ff4500, #ff6347);
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .place-order {
+    flex-direction: column;
+    padding: 0 4vw;
+  }
+
+  .place-order-left,
+  .place-order-right {
+    max-width: 100%;
+  }
+}

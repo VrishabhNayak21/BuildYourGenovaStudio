@@ -1,0 +1,212 @@
+body {
+  margin: 0;
+  background: linear-gradient(to right, #f6f9fc, #f0f4ff);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+.cart-blur-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-blur-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background: url('/images/home-bg.jpg') center/cover no-repeat;
+  z-index: 0;
+  filter: blur(12px) brightness(0.6);
+  pointer-events: none;
+}
+
+.cart {
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  padding: 0 5vw;
+}
+
+.cart-items-title {
+  display: grid;
+  grid-template-columns: 70px 1.5fr 1fr 1fr 1fr 0.5fr;
+  align-items: center;
+  justify-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: max(1vw, 15px);
+  font-weight: 600;
+  padding: 14px 0;
+  border-radius: 10px 10px 0 0;
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+
+.cart-items-item {
+  display: grid;
+  grid-template-columns: 70px 1.5fr 1fr 1fr 1fr 0.5fr; /* Same as above */
+  align-items: center;
+  justify-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  color: #000;
+  text-align: center;
+}
+
+
+.cart-items-item span,
+.cart-items-item div {
+  color: #000; /* Black for numbers/text */
+}
+
+.cart-items-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.cart-items-item img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.cart-items-item img:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.clickable {
+  cursor: pointer;
+  color: #007bff;
+  transition: 0.2s;
+  font-weight: 500;
+}
+.clickable:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.cart-items-item .cross {
+  cursor: pointer;
+  color: #e74c3c;
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+.cart-items-item .cross:hover {
+  transform: scale(1.3);
+}
+
+.cart hr {
+  height: 1px;
+  background-color: #ccc;
+  border: none;
+  margin: 20px 0;
+}
+
+.cart-bottom {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.cart-total {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px 24px; /* reduced padding */
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* tighter spacing */
+  backdrop-filter: blur(6px);
+  font-size: 14px; /* slightly smaller text if needed */
+}
+
+
+.cart-total h2 {
+  margin-bottom: 10px;
+  color: #222;
+  font-size: 24px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 12px;
+  text-align: center;
+}
+
+.cart-total-details {
+  display: flex;
+  justify-content: space-between;
+  color: #000; /* black numbers in total */
+  font-size: 16px;
+}
+
+.cart-total button {
+  margin-top: 20px;
+  border: none;
+  color: white;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+.cart-total button:hover {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  transform: scale(1.02);
+}
+
+.header-visible {
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 750px) {
+  .cart {
+    padding: 0 4vw;
+  }
+
+  .cart-bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cart-items-title {
+    font-size: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    padding: 8px 0;
+  }
+
+  .cart-items-item {
+    grid-template-columns: 1fr 1fr;
+    padding: 12px;
+    row-gap: 10px;
+    font-size: 14px;
+  }
+
+  .cart-items-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .cart-total {
+    margin-top: 30px;
+  }
+}

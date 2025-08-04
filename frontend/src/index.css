@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+/* ===== GLOBAL RESET & BASE STYLES ===== */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #ffffff; /* Soft background */
+  color: #333; /* Consistent text color */
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* Anchor tags inherit color and remove underline */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: tomato; /* Optional hover effect */
+}
+
+/* App container with max width */
+.app {
+  width: 90%;
+  max-width: 1300px;
+  margin: auto;
+  padding: 20px 0;
+}
+
+/* Simple fade-in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
