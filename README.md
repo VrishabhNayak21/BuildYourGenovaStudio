@@ -33,11 +33,4 @@ Genova Studio is a purchasing platform where users can browse and buy top-qualit
 
 ---
 
-## 📸 Screenshots
-
-> _(You can add screenshots or GIFs of the site here for better appeal)_
-
----
-
-## 🧩 Folder Structure
 
