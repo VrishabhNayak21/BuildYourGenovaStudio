@@ -5,7 +5,7 @@ import Home from './pages/Home/Home';
 import Cart from './pages/Cart/Cart';
 import PlaceOrder from './pages/placeOrder/PlaceOrder';
 import Payment from './pages/Payment/Payment';
-import Footer from './components/Footer/footer';
+import Footer from './components/Footer/Footer';
 import LoginPopup from './components/LoginPopup/LoginPopup';
 import Verify from './pages/Verify/Verify';
 import MyOrders from './pages/MyOrders/MyOrders';
