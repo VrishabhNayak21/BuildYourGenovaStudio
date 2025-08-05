@@ -1,73 +1,65 @@
-// Required modules
-const Stripe = require('stripe');
-const dotenv = require('dotenv');
-const orderModel = require('../models/orderModel');
-const userModel = require('../models/userModel');
+// orderController.js
 
-// Load environment variables
+import Stripe from 'stripe';
+import dotenv from 'dotenv';
+import orderModel from '../models/orderModel.js';
+import userModel from '../models/userModel.js';
+
 dotenv.config();
 
-// Stripe setup
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-
-// Frontend URL (from env)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const frontend_url = process.env.FRONTEND_URL;
 
-// Place order controller
-const placeOrder = async (req, res) => {
-    try {
-        // 1. Save order in DB
-        const newOrder = new orderModel({
-            userId: req.body.userId,
-            items: req.body.items,
-            amount: req.body.amount,
-            address: req.body.address
-        });
+export const placeOrder = async (req, res) => {
+  try {
+    const newOrder = new orderModel({
+      userId: req.body.userId,
+      items: req.body.items,
+      amount: req.body.amount,
+      address: req.body.address,
+    });
 
-        await newOrder.save();
+    await newOrder.save();
+    await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
 
-        // 2. Clear cart
-        await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
+    const line_items = req.body.items.map((item) => ({
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: item.name,
+        },
+        unit_amount: Math.round(item.price * 100),
+      },
+      quantity: item.quantity,
+    }));
 
-        // 3. Prepare Stripe line items
-        const line_items = req.body.items.map((item) => ({
-            price_data: {
-                currency: "usd",
-                product_data: {
-                    name: item.name
-                },
-                unit_amount: Math.round(item.price * 100), // Ensure it's an integer
-            },
-            quantity: item.quantity
-        }));
+    line_items.push({
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: 'Delivery Charges',
+        },
+        unit_amount: 2 * 100,
+      },
+      quantity: 1,
+    });
 
-        // Add delivery charges
-        line_items.push({
-            price_data: {
-                currency: "usd",
-                product_data: {
-                    name: "Delivery Charges"
-                },
-                unit_amount: 2 * 100
-            },
-            quantity: 1
-        });
+    const session = await stripe.checkout.sessions.create({
+      line_items: line_items,
+      mode: 'payment',
+      success_url: `${frontend_url}/myorders?success=true&orderId=${newOrder._id}`,
+      cancel_url: `${frontend_url}/myorders?success=false&orderId=${newOrder._id}`,
+    });
 
-        // 4. Create Stripe session
-        const session = await stripe.checkout.sessions.create({
-            line_items: line_items,
-            mode: 'payment',
-            success_url: `${frontend_url}/myorders?success=true&orderId=${newOrder._id}`,
-            cancel_url: `${frontend_url}/myorders?success=false&orderId=${newOrder._id}`,
-        });
-
-        // 5. Send response
-        res.json({ success: true, session_url: session.url });
-
-    } catch (error) {
-        console.error('Stripe checkout error:', error);
-        res.json({ success: false, message: error.message });
-    }
+    res.json({ success: true, session_url: session.url });
+  } catch (error) {
+    console.error('Stripe checkout error:', error);
+    res.json({ success: false, message: error.message });
+  }
 };
 
-module.exports = { placeOrder };
+// You can define these later if needed
+export const verifyOrder = (req, res) => {};
+export const userOrders = (req, res) => {};
+export const updateStatus = (req, res) => {};
+// DO NOT export listOrders if you don’t have it
