@@ -58,6 +58,69 @@
     gap: 30px;
 }
 
+/* Burger button (hidden by default, shown on mobile) */
+.navbar-burger {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+.navbar-burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #374151;
+    margin: 5px 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    border-radius: 2px;
+}
+.navbar-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.navbar-burger.open span:nth-child(2) { opacity: 0; }
+.navbar-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile slide-out panel */
+.navbar-mobile-menu {
+    position: fixed;
+    top: 64px;
+    right: 16px;
+    left: 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    padding: 16px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    z-index: 20;
+}
+.navbar-mobile-menu.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.navbar-mobile-menu .mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.navbar-mobile-menu .mobile-links a {
+    color: #374151;
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.navbar-mobile-menu .mobile-links a:hover { background: #f3f4f6; color: #111827; }
+.navbar-mobile-menu .mobile-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.navbar-mobile-menu .mobile-actions .mobile-cart { grid-column: 1 / -1; text-align: center; display: block; padding: 10px 12px; background: #fff7f5; border: 1px solid #ffe1da; border-radius: 10px; color: #b91c1c; }
+.navbar-mobile-menu .mobile-actions button { border: 1px solid #ff6a4d; background: #fff; color: #ff6a4d; padding: 10px 12px; border-radius: 10px; font-weight: 600; }
+.navbar-mobile-menu .mobile-actions button:hover { background: #fff4f2; }
+
 /* Button */
 .navbar button {
     background: transparent;
@@ -181,6 +244,9 @@
     width: 140px;
   }
 
+  /* Hide GIF carousel on tablet and smaller */
+  .navbar-gif-carousel { display: none; }
+
   .navbar-menu {
     gap: 18px;
     font-size: 17px;
@@ -256,6 +322,9 @@
     width: 70px;
     height: 45px;
   }
+
+  /* Show burger on mobile */
+  .navbar-burger { display: inline-block; }
 }
 
 /* ========== CAROUSEL CONTAINER ========== */
@@ -298,3 +367,8 @@
 }
 
 
+
+/* Final override: hide GIF carousel on tablet/mobile (wins over later base rules) */
+@media (max-width: 1050px) {
+  .navbar-gif-carousel { display: none !important; }
+}
