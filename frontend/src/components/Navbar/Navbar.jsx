@@ -7,6 +7,7 @@ import { StoreContext } from '../../context/StoreContext';
 const Navbar = ({setShowLogin}) => {
     
     const [menu,setMenu] = useState("Home");
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const {getTotalCartAmount,token,setToken} = useContext(StoreContext);
 
@@ -17,6 +18,7 @@ const Navbar = ({setShowLogin}) => {
       localStorage.removeItem("token");
       setToken("");
       navigate("/")
+      setMobileOpen(false);
 
 
     }
@@ -32,7 +34,12 @@ const Navbar = ({setShowLogin}) => {
 
   return (
     <div className='navbar'>
-       <Link to='/'><img src={assets.logo} alt="" className="logo" /></Link>
+       <Link to='/' onClick={()=>{setMobileOpen(false)}}><img src={assets.logo} alt="" className="logo" /></Link>
+       <button className={`navbar-burger ${mobileOpen? 'open':''}`} aria-label="Menu" aria-expanded={mobileOpen} onClick={()=>setMobileOpen(o=>!o)}>
+         <span></span>
+         <span></span>
+         <span></span>
+       </button>
        <ul className='navbar-menu'>
         <Link to='/' onClick={()=>setMenu("Home")} className={menu==="Home"?"active":""}>Home</Link>
         <a href='#explore-menu' onClick={(e)=>{e.preventDefault(); setMenu("Products"); window.location.href = '/#explore-menu';}} className={menu==="Products"?"active":""}>Products</a>
@@ -60,11 +67,11 @@ const Navbar = ({setShowLogin}) => {
                 <Link to='/cart'><img src={assets.cart_icon} alt="" /></Link>
                 <div className={getTotalCartAmount()===0?"":"dot"}> </div>
             </div>
-            {!token?<button onClick={()=>setShowLogin(true)}>sign in</button>
+            {!token?<button onClick={()=>{setShowLogin(true); setMobileOpen(false);}}>sign in</button>
             :<div className='navbar-profile'>
               <img src={assets.profile_icon} alt="" />
               <ul className="nav-profile-dropdown">
-                <li onClick={()=>navigate('/myorders')}><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
+                <li onClick={()=>{navigate('/myorders'); setMobileOpen(false);}}><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
                 {/* <hr /> */}
                 <li onClick={logout}><img src={assets.logout_icon} alt="" /><p>Logout</p></li>
               </ul>
@@ -72,6 +79,26 @@ const Navbar = ({setShowLogin}) => {
             </div>}
             
 
+        </div>
+        {/* Mobile slide-out menu */}
+        <div className={`navbar-mobile-menu ${mobileOpen? 'show' : ''}`}>
+          <div className='mobile-links'>
+            <Link to='/' onClick={()=>{setMenu('Home'); setMobileOpen(false);}}>Home</Link>
+            <a href='#explore-menu' onClick={(e)=>{e.preventDefault(); setMenu('Products'); setMobileOpen(false); window.location.href = '/#explore-menu';}}>Products</a>
+            <a href='#app-download' onClick={(e)=>{e.preventDefault(); setMenu('Mobile-app'); setMobileOpen(false); window.location.href = '/#app-download';}}>Brands</a>
+            <a href='#footer' onClick={(e)=>{e.preventDefault(); setMenu('Contact us'); setMobileOpen(false); window.location.href = '/#footer';}}>Contact us</a>
+          </div>
+          <div className='mobile-actions'>
+            <Link to='/cart' onClick={()=>setMobileOpen(false)} className='mobile-cart'>Cart {getTotalCartAmount()===0? '' : '•'}</Link>
+            {!token ? (
+              <button onClick={()=>{setShowLogin(true);}}>sign in</button>
+            ) : (
+              <>
+                <button onClick={()=>{navigate('/myorders'); setMobileOpen(false);}}>Orders</button>
+                <button onClick={logout}>Logout</button>
+              </>
+            )}
+          </div>
         </div>
       
     </div>
