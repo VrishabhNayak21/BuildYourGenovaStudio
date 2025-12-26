@@ -3,7 +3,7 @@ import userModel from '../models/userModel.js';
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_your_stripe_test_key_here');
-const frontend_url = process.env.FRONTEND_URL  || 'http://localhost:5173'|| 'https://buildyourgenovastudio.onrender.com';
+const frontend_url = process.env.FRONTEND_URL || 'https://buildyourgenovastudio.onrender.com';
 const placeOrder = async (req, res) => {
     try {
         const newOrder = new orderModel({
@@ -80,26 +80,26 @@ const userOrders = async (req, res) => {
 };
 
 // listing orders for admin panel
-const listOrders = async (req,res) => {
+const listOrders = async (req, res) => {
     try {
         const order = await orderModel.find({});
-        res.json({success:true,data:order})
+        res.json({ success: true, data: order })
     } catch (error) {
         console.log(error);
-        res.json({success:false,message:"Error"})
-        
+        res.json({ success: false, message: "Error" })
+
     }
 }
 
 // api for updating order status
-const updateStatus = async (req,res) => {
+const updateStatus = async (req, res) => {
     try {
-        await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status})
-        res.json({success:true,message:"Status Updated"})
+        await orderModel.findByIdAndUpdate(req.body.orderId, { status: req.body.status })
+        res.json({ success: true, message: "Status Updated" })
     } catch (error) {
         console.log(error);
-        res.json({success:false,message:"Error"})
+        res.json({ success: false, message: "Error" })
     }
 }
 
-export { placeOrder, verifyOrder, userOrders,listOrders, updateStatus };
+export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus };
