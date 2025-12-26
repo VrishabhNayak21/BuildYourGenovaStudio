@@ -3,8 +3,7 @@ import userModel from '../models/userModel.js';
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_your_stripe_test_key_here');
-const frontend_url = process.env.FRONTEND_URL || 'https://buildyourgenovastudio.onrender.com';
-
+const frontend_url = process.env.FRONTEND_URL  || 'http://localhost:5173'|| 'https://buildyourgenovastudio.onrender.com';
 const placeOrder = async (req, res) => {
     try {
         const newOrder = new orderModel({

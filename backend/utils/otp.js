@@ -1,6 +1,12 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Helper to get Resend instance
+const getResendClient = () => {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is missing in environment variables.");
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+};
 
 export function generateOTP() {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -8,6 +14,7 @@ export function generateOTP() {
 
 export async function sendOTPEmail(email, otp) {
   try {
+    const resend = getResendClient();
     const data = await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: email,
@@ -23,6 +30,7 @@ export async function sendOTPEmail(email, otp) {
 
 export async function sendWelcomeEmail(email) {
   try {
+    const resend = getResendClient();
     const data = await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: email,

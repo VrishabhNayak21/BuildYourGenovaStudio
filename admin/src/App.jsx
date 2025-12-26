@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
  
  const App = () => {
 
-  const url = "https://buildyourgenovastudio-backend.onrender.com"
+  const url = "https://buildyourgenovastudio-backend.onrender.com" || "http://localhost:5000";
 
 
    return (

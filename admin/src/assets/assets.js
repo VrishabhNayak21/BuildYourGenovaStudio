@@ -15,4 +15,4 @@ export const assets ={
 }
 
 
-export const url = 'https://buildyourgenovastudio-backend.onrender.com'
+export const url = 'https://buildyourgenovastudio-backend.onrender.com' || 'http://localhost:5000';
