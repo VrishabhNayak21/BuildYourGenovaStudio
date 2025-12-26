@@ -1,19 +1,20 @@
-import React,  { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './LoginPopup.css'
 import { assets } from '../../assets/assets'
 import { StoreContext } from '../../context/StoreContext'
 import axios from "axios"
+import { toast } from 'react-toastify';
 
 const LoginPopup = ({ setShowLogin }) => {
 
-    const {url,setToken} = useContext(StoreContext)
+    const { url, setToken } = useContext(StoreContext)
 
 
     const [currState, setCurrState] = useState("Login")
-    const [data,setData] = useState ({
-        name:"",
-        email:"",
-        password:""
+    const [data, setData] = useState({
+        name: "",
+        email: "",
+        password: ""
     })
 
     const [showOTP, setShowOTP] = useState(false);
@@ -25,7 +26,7 @@ const LoginPopup = ({ setShowLogin }) => {
     const onChangeHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        setData(data=>({...data,[name]:value}))
+        setData(data => ({ ...data, [name]: value }))
     }
 
     const onLogin = async (event) => {
@@ -39,7 +40,7 @@ const LoginPopup = ({ setShowLogin }) => {
                 localStorage.setItem("token", response.data.token);
                 setShowLogin(false);
             } else {
-                alert(response.data.message);
+                toast.error(response.data.message);
             }
         } else {
             newUrl += "/api/user/register";
@@ -47,9 +48,9 @@ const LoginPopup = ({ setShowLogin }) => {
             if (response.data.success) {
                 setShowOTP(true);
                 setPendingEmail(data.email);
-                alert("Registration successful. Please enter the OTP sent to your email.");
+                toast.success("Registration successful. Please enter the OTP sent to your email.");
             } else {
-                alert(response.data.message);
+                toast.error(response.data.message);
             }
         }
     };
@@ -99,8 +100,8 @@ const LoginPopup = ({ setShowLogin }) => {
                         />
                     </div>
                     <button type="submit" disabled={otpLoading}>{otpLoading ? "Verifying..." : "Verify OTP"}</button>
-                    {otpLoading && <div className="otp-spinner" style={{marginTop:8}}><div className="spinner"></div></div>}
-                    {otpMessage && <div className="otp-message" style={{marginTop:8}}>{otpMessage}</div>}
+                    {otpLoading && <div className="otp-spinner" style={{ marginTop: 8 }}><div className="spinner"></div></div>}
+                    {otpMessage && <div className="otp-message" style={{ marginTop: 8 }}>{otpMessage}</div>}
                 </form>
             ) : (
                 <form onSubmit={onLogin} className="login-popup-container">
