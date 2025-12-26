@@ -34,6 +34,7 @@ bower_components/
 # .env.test
 # .env.production
 
+
 # next.js build output
 .next/
 
